@@ -1,0 +1,158 @@
+PROJETO: SISTEMA DE ESTOQUE PARA ATELIER
+CLIENTE: ATELIER D. MARIA
+GERENTE DE PROJETO:	Márcio Las
+DATA ATUALIZAÇÃO: 05/02/2009
+
+EQUIPE:	MÁRCIO LAS, EMIR CALIFE E GEIMISON FARIAS
+
+
+AMBIENTE
+----------------------------------------------------------	
+
+OK	BANCO DE DADOS					MÁRCIO LAS
+OK	CLASSES VISUAIS					MÁRCIO LAS
+OK	ESTRUTURA						MÁRCIO LAS
+
+
+CADASTROS
+----------------------------------------------------------	
+
+OK	GRUPOS DE PRODUTOS				MÁRCIO LAS
+OK	PRODUTOS						MÁRCIO LAS
+	CLIENTES						EMIR
+	FORNECEDORES					EMIR
+
+	
+MOVIMENTAÇÕES
+----------------------------------------------------------	
+
+	COMPRAS							EMIR
+	ORÇAMENTOS						GEIMISON
++/-	VENDAS							MÁRCIO LAS
+
+	
+INFORMAÇÕES
+----------------------------------------------------------	
+
+	ESTOQUE							GEIMISON
+	RELATÓRIOS
+	
+	
+GERÊNCIA
+----------------------------------------------------------	
+	
+OK	CARACTERÍSTICAS DE PRODUTOS		MÁRCIO LAS
+OK	UNIDADES						MÁRCIO LAS
+OK	ESTADOS							MÁRCIO LAS
+	CIDADES							GEIMISON
+	BAIRROS							GEIMISON
++/-	CONFIGURAÇÕES					MÁRCIO LAS
+OK	USUÁRIOS						MÁRCIO LAS
+	
+	
+AJUDA
+----------------------------------------------------------	
+
+	SOBRE							MÁRCIO LAS
+	
+
+DIVERSOS
+----------------------------------------------------------	
+
+OK	FALTA TRATAMENTO DE ERROS		MÁRCIO LAS
+	FALTA RELATÓRIOS				
+	FALTA AVISOS DO ESTOQUE			
+	
+
+PROBLEMAS ENCONTRADOS:
+==========================================================
+
+DATAS ANTERIORES
+----------------------------------------------------------	
+
+OK	1. No login não está posicionando no usuário e vai direto para o botão entrar
+		FOI RESOLVIDO COM GAMBI! KeyPress para posicionar no txtUsuario
+		
+	2. Na inclusão de usuários não posiciona no usuário e vai direto para a senha
+
+		Obs.: Isso acontece em praticamente todos os paineis de trabalho!
+
+IMPLEMENTAÇÕES
+
+OK	1. Implementar cmb para a opção lookup, informando uma tabela o cmb abre um select no init e fecha no destroy
+
+OK	2. PainelDeTrabalho com SQLCmd( <função> )
+		Onde irá chamar os métodos já criados:
+			SQLSelect()
+			SQLUpdate()	
+			SQLDelete()
+			SQLInsert()
+		
+		Obs.: O objetivo é trabalhar melhor o SQLSelect() com filtro na aba localizar
+		
++/-	3. Implementar painel de seleção
+		OBS.: AINDA TEM AJUSTES, POR EXEMPLO TIPOS DE DADOS, ETC.
+		
+OK	4. Opção para não usar o painel de seleção
+
+OK	5. Botão <Seleção> para mostrar ou ocultar o painel de selação
+		
+OK	6. Implementar método _SQLWhere() (este é chamado em SQLCmd() que aplica um filtro ao método SQLSelect())
+	
+OK	7. O sistema deverá gravar um objeto registro em salvar e tem que ter dois novos métodos
+		AntesSalvar() e DepoisSalvar() no painel de trabalho
+	
+OK	8. Menu no botão
+
+	9. XML para configuração do banco de dados
+
+	
+DATA: 01/03/2009
+----------------------------------------------------------	
+
+PROBLEMA:
+OK	Os botões da grid Modificar e Remover não estão funcionando como deveria e foi
+	observado que só funciona no último registro.
+	
+	O problema foi resolvido trocando os objetos base: Image para CommandButton.
+
+AJUSTES:
+	Itens características reposição de registros na inclusão, alteração e exclusão.
+
+	
+DATA: 06/03/2009
+----------------------------------------------------------	
+	
+OK	Colunas bagunçadas
+	Correção:
+	codigo_produtos_vendas;    codigo_produto;    descricao;    codigo_unidade;    quantidade;    quantidade_entregue;    precounitario; 	situacao
+	colCodigo_produtos_vendas; colCodigo_produto; colDescricao; colCodigo_unidade; colQuantidade; colQuantidade_entregue; colPrecounitario; colSituacao
+	Sequencial;                Código;            Descrição;    Unidade;           Quantidade;    Qtde. Entregue;         Preço Unitário;   Situação
+	80;                        80;                200;          40;                80;            80;                     80;               60
+
+OK	Trazer também a descrição da unidade no select de produtos 
+	de vendas e mostrar na grid ao invés do código
+
+OK	Trazer valor total e mostrar na grid
+
+OK	Não está mostrando o total na inclusão/alteração de
+	produtos na venda
+
+OK	Descrição do tipo de serviço na grid de vendas
+
+OK Descrição da situação na grid de vendas
+	&IIf(vendas.situacao='N','Nula',IIf(vendas.situacao='P','P. Atend.',IIf(vendas.situacao='F','Fechada','Aberta')))
+	
+OK	Descrição da situação na grid de produtos da venda
+	&IIf(produtos_vendas.situacao='N','Anulado',IIf(produtos_vendas.situacao='P','P. Atend.',IIf(produtos_vendas.situacao='F','Fechado','Aberto')))	
+
+OK	Alinhamento de colunas na grid
+		String		Esquerda
+		Numeric		Direita
+		Data		Esquerda ou centro
+		outros		Esquerda
+
+OK	Máscara das colunas da grid
+	
+	Falta: botões fechar e anular venda.
+
